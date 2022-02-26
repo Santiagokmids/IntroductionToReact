@@ -6,6 +6,7 @@
         <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
         <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
         <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/remarkable/1.7.1/remarkable.min.js"></script>
     </head>
     <body>
         <div id="root"></div>
@@ -147,6 +148,56 @@
             ReactDOM.render(
                 <TodoApp />,
                 document.getElementById('todos-example')
+            );
+
+        </script>
+
+        <br>
+
+        <p>Example: A Component Using External Plugins</p>
+        <div id="markdown-example"></div>
+        <script type="text/babel">
+            class MarkdownEditor extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.md = new Remarkable();
+                    this.handleChange = this.handleChange.bind(this);
+                    this.state = { value: 'Hello, **world**!' };
+                }
+
+                handleChange(e) {
+                    this.setState({ value: e.target.value });
+                }
+
+                getRawMarkup() {
+                    return { __html: this.md.render(this.state.value) };
+                }
+
+                render() {
+                    return(
+                        <div className="MarkdownEditor">
+                            <h3>Input</h3>
+                            <label htmlFor="markdown-content">
+                                Enter some markdown
+                            </label>
+                            <textarea
+                                id="markdown-content"
+                                onChange={this.handleChange}
+                                defaultValue={this.state.value}
+                            />
+                            <h3>OutPut</h3>
+                            <div
+                                className="content"
+                                dangerouslySetInnerHTML={this.getRawMarkup()}
+                            />
+                        </div>  
+                    );
+                }
+            }
+
+            ReactDOM.render(
+                <MarkdownEditor />,
+                document.getElementById('markdown-example')
             );
 
         </script>
