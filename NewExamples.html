@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Hello World</title>
+        <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/remarkable/1.7.1/remarkable.min.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="text/babel">
+            ReactDOM.render(
+                <h1>Hello, World!</h1>,
+                document.getElementById('root'));
+        </script>
+
+
+        
+        <p>Example: A Simple Component</p>
+        <div id="hello-example"></div>
+        <script type="text/babel">
+
+            class HelloMessage extends React.Component{
+                render(){
+                    return(
+                        <div>
+                            Hola {this.props.name}
+                        </div>
+                    );
+                }
+            }
+
+            ReactDOM.render(
+                <HelloMessage name = "Luis y Santiago"/>,
+                document.getElementById('hello-example')
+            )
+        </script>
+    </body>
+</html>
